@@ -25,6 +25,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "2",
     "enzyme-to-json": "^3.3.5",
+    "express": "^4.16.4",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "firebase": "^6.0.1",
     "html-react-parser": "^0.7.0",
