@@ -1,0 +1,15 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  transition: none;
+}
+
+.comment-username {
+  margin: 0 0 $s-size 0;
+}
+
+.comment-content {
+  margin: 0 $s-size;
+  padding: 0;
+  font-size: $font-size-small;
+}

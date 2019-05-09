@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Story by rank and without comments correctly 1`] = `
+<div>
+  <div
+    className="list-item content-container"
+  >
+    <div>
+      <div>
+        <div
+          className="list-item__title"
+        >
+          <a
+            href="http://example.com"
+          >
+            <p
+              className="list-item__title"
+            >
+              5.testTitle
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      className="list-item__subtitle"
+    >
+      123
+       points by @
+      TestAuthor
+       
+      03:42:01 1970/01/01
+       
+      <Link
+        className="list-item__subtitle list-item__subtitle--link"
+        replace={false}
+        to="story/1"
+      >
+        <span>
+          top 20 comments
+        </span>
+      </Link>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`should render Story with comments correctly 1`] = `
+<div>
+  <div
+    className="content-container"
+  >
+    <div
+      className="list-item content-container"
+    >
+      <div>
+        <div>
+          <div
+            className="list-item__title"
+          >
+            <a
+              href="http://example.com"
+            >
+              <p
+                className="list-item__title"
+              >
+                testTitle
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        className="list-item__subtitle"
+      >
+        123
+         points by @
+        TestAuthor
+         
+        03:42:01 1970/01/01
+         
+      </div>
+    </div>
+    <div
+      className="list-item--content"
+    >
+      sometext
+    </div>
+    <Connect(Comment)
+      itemId={3}
+      key="3"
+    />
+    <Connect(Comment)
+      itemId={4}
+      key="4"
+    />
+    <Connect(Comment)
+      itemId={5}
+      key="5"
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,1 @@
+test("should setup item by id subscriber", () => {})

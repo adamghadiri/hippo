@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render header correctly 1`] = `
+<header
+  className="header"
+>
+  <div
+    className="content-container"
+  >
+    <div
+      className="header__content"
+    >
+      <img
+        className="header__logo"
+        src="/images/hacker-news-logo.jpg"
+      />
+      <Link
+        className="header__title"
+        replace={false}
+        to="/"
+      >
+        Hacker News
+      </Link>
+    </div>
+  </div>
+</header>
+`;

@@ -1,0 +1,1 @@
+test("should setup story by rank subscriber", () => {})

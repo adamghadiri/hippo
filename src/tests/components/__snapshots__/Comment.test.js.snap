@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Comment by id correctly 1`] = `
+<div>
+  <div
+    className="list-item comment"
+  >
+    <h6
+      className="comment-username"
+    >
+      @
+      TestAuthor
+       
+      03:42:01 1970/01/01
+    </h6>
+    <div
+      className="comment-content"
+    >
+      sometext
+    </div>
+  </div>
+</div>
+`;

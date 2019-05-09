@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render top stories page correctly 1`] = `
+<div
+  className="content-container"
+>
+  <h3
+    className="list-header"
+  >
+    Popular updates
+  </h3>
+  <div
+    className="list-body"
+  >
+    <Connect(Story)
+      key="0"
+      rank={0}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="1"
+      rank={1}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="2"
+      rank={2}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="3"
+      rank={3}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="4"
+      rank={4}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="5"
+      rank={5}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="6"
+      rank={6}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="7"
+      rank={7}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="8"
+      rank={8}
+      showRank={true}
+    />
+    <Connect(Story)
+      key="9"
+      rank={9}
+      showRank={true}
+    />
+  </div>
+</div>
+`;
