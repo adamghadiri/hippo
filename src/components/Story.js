@@ -40,7 +40,6 @@ export class Story extends React.Component {
     if (data) {
       const { title, by, id, kids, score, time, url, text } = data;
 
-
       showStory = () => {
         const titleToShow = (
           <p className="list-item__title">
@@ -59,7 +58,7 @@ export class Story extends React.Component {
 
         const subtitle = (
           <div className="list-item__subtitle">
-            {score} points by @{by} {formatTime(time)}{" "}
+            {score} points by @{by} created {formatTime(time)} {" "}
             {this.props.showRank && commentsLink}
           </div>
         );
