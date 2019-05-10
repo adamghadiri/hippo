@@ -4,6 +4,8 @@
 
 hippo is a small web app that uses [Hacker News API](https://github.com/HackerNews/API) to present the news. It's always live! So you don't need to refresh the page to see the changes for stories and comments.
 
+Go to this [link](https://hacker-news-top-stories.herokuapp.com) to visit hippo on heroku.
+
 ### Developing:
 
 Open up a terminal and install the dependencies:
@@ -57,5 +59,3 @@ yarn run start
 to fire up a small web server that hosts the assets.
 
 hippo is also deployed to heroku!!
-
-Hop on this [link](https://hacker-news-top-stories.herokuapp.com) to visit hippo on heroku.
