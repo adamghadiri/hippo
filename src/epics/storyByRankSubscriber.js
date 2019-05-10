@@ -7,7 +7,7 @@ import { database } from "../db/firebase";
 
 const createStoryByRankObservable = rank => {
   return Observable.create(observer => {
-    let id;
+    let id = null;
     const onError = error => {
       observer.error(error);
     };
@@ -16,7 +16,7 @@ const createStoryByRankObservable = rank => {
     };
     const onTopStoriesChange = snapshot => {
       const newId = snapshot.val();
-      if (!id) {
+      if (id === null) {
         id = newId;
       } else {
         database

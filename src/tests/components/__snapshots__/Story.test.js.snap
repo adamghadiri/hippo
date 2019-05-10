@@ -28,8 +28,9 @@ exports[`should render Story by rank and without comments correctly 1`] = `
       123
        points by @
       TestAuthor
-       
+       created 
       03:42:01 1970/01/01
+       
        
       <Link
         className="list-item__subtitle list-item__subtitle--link"
@@ -75,8 +76,9 @@ exports[`should render Story with comments correctly 1`] = `
         123
          points by @
         TestAuthor
-         
+         created 
         03:42:01 1970/01/01
+         
          
       </div>
     </div>
