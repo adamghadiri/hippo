@@ -1,7 +1,7 @@
 {
   "name": "hippo",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "public/dist/bundle.js",
   "author": "Adam Ghadiri",
   "license": "MIT",
   "engines": {
@@ -46,7 +46,6 @@
     "rxjs": "^6.5.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "uuid": "^3.3.2",
     "webpack": "^4.31.0"
   },
   "devDependencies": {

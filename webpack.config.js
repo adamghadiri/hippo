@@ -1,7 +1,6 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-
 module.exports = env => {
   const isProduction = env === "production";
   const CSSExtract = new ExtractTextPlugin("styles.css");
@@ -34,7 +33,7 @@ module.exports = env => {
     devServer: {
       contentBase: path.join(__dirname, "public"),
       historyApiFallback: true,
-      publicPath: '/dist/'
+      publicPath: "/dist/"
     },
     mode: "development"
   };

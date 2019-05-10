@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { createEpicMiddleware } from "redux-observable";
 import stories from "../reducers/stories";
 import items from "../reducers/items";
