@@ -16,7 +16,6 @@ exports[`should render not found page correctly 1`] = `
   </div>
   <Link
     className="not-found__button"
-    replace={false}
     to="/"
   >
     Go home

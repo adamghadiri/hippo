@@ -33,7 +33,6 @@ exports[`should render Story by rank and without comments correctly 1`] = `
        
       <Link
         className="list-item__subtitle list-item__subtitle--link"
-        replace={false}
         to="story/1"
       >
         <span>
@@ -86,15 +85,15 @@ exports[`should render Story with comments correctly 1`] = `
     >
       sometext
     </div>
-    <Connect(Comment)
+    <ConnectFunction
       itemId={3}
       key="3"
     />
-    <Connect(Comment)
+    <ConnectFunction
       itemId={4}
       key="4"
     />
-    <Connect(Comment)
+    <ConnectFunction
       itemId={5}
       key="5"
     />
