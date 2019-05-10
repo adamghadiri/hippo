@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import parse from "html-react-parser";
-import { itemSelector } from "../selectors/items";
+import { makeItemSelector } from "../selectors/items";
 import actions from "../actions/items/actions";
 import CommentLoader from "./CommentLoader";
 import { formatTime } from "./util";
@@ -44,10 +44,14 @@ export class Comment extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    item: itemSelector(state, props)
+const makeMapStateToProps = () => {
+  const itemSelector = makeItemSelector();
+  const mapStateToProps = (state, props) => {
+    return {
+      item: itemSelector(state, props)
+    };
   };
+  return mapStateToProps;
 };
 
 const mapDispatchToProps = dispatch =>
@@ -60,6 +64,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(Comment);

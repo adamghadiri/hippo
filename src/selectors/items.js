@@ -1,10 +1,17 @@
+import { createSelector } from "reselect";
+
 const getItem = (state, props) => state.items[props.itemId];
 
-const itemSelector = (state, props) =>
-  getItem(state, props) || {
-    loading: false,
-    data: null,
-    error: null
-  };
+const makeItemSelector = () => createSelector(
+  getItem,
+  item =>
+    item
+      ? item
+      : {
+          loading: false,
+          data: null,
+          error: null
+        }
+);
 
-export { getItem, itemSelector };
+export { getItem, makeItemSelector };

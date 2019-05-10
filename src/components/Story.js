@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
-import { storySelector } from "../selectors/stories";
-import { itemSelector } from "../selectors/items";
+import { makeStorySelector } from "../selectors/stories";
+import { makeItemSelector } from "../selectors/items";
 import actions from "../actions/stories/actions";
 import itemActions from "../actions/items/actions";
 import Comment from "./Comment";
@@ -58,7 +58,7 @@ export class Story extends React.Component {
 
         const subtitle = (
           <div className="list-item__subtitle">
-            {score} points by @{by} created {formatTime(time)} {" "}
+            {score} points by @{by} created {formatTime(time)}{" "}
             {this.props.showRank && commentsLink}
           </div>
         );
@@ -126,11 +126,16 @@ export class Story extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  return {
-    story: storySelector(state, props),
-    item: itemSelector(state, props)
+const makeMapStateToProps = () => {
+  const storySelector = makeStorySelector();
+  const itemSelector = makeItemSelector();
+  const mapStateToProps = (state, props) => {
+    return {
+      story: storySelector(state, props),
+      item: itemSelector(state, props)
+    };
   };
+  return mapStateToProps;
 };
 
 const mapDispatchToProps = dispatch =>
@@ -145,6 +150,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(Story);

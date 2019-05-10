@@ -1,4 +1,4 @@
-import { getStory, storySelector } from "../../selectors/stories";
+import { getStory, makeStorySelector } from "../../selectors/stories";
 
 test("get story should work", () => {
   const story = {
@@ -26,7 +26,7 @@ test("get story should work with no data in store", () => {
   expect(result).toEqual(undefined);
 });
 
-test("story selector should work", () => {
+test("make story selector should work", () => {
   const story = {
     loading: false,
     data: [{ testId: "testdata" }],
@@ -40,15 +40,15 @@ test("story selector should work", () => {
   const props = {
     rank: 4
   };
-  const result = storySelector(state, props);
+  const result = makeStorySelector()(state, props);
   expect(result).toEqual(story);
 });
 
-test("story selector should work with no data in store", () => {
+test("make story selector should work with no data in store", () => {
   const props = {
     rank: 4
   };
-  const result = storySelector({ stories: {} }, props);
+  const result = makeStorySelector()({ stories: {} }, props);
   expect(result).toEqual({
     loading: false,
     data: null,

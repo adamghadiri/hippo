@@ -1,4 +1,4 @@
-import { getItem, itemSelector } from "../../selectors/items";
+import { getItem, makeItemSelector } from "../../selectors/items";
 
 test("get item should work", () => {
   const item = {
@@ -26,7 +26,7 @@ test("get item should work with no data in store", () => {
   expect(result).toEqual(undefined);
 });
 
-test("item selector should work", () => {
+test("make item selector should work", () => {
   const item = {
     loading: false,
     data: [{ testId: "testdata" }],
@@ -40,15 +40,15 @@ test("item selector should work", () => {
   const props = {
     itemId: "testId"
   };
-  const result = itemSelector(state, props);
+  const result = makeItemSelector()(state, props);
   expect(result).toEqual(item);
 });
 
-test("item selector should work with no data in store", () => {
+test("make item selector should work with no data in store", () => {
   const props = {
     itemId: "testId"
   };
-  const result = itemSelector({ items: {} }, props);
+  const result = makeItemSelector()({ items: {} }, props);
   expect(result).toEqual({
     loading: false,
     data: null,
