@@ -7,44 +7,31 @@ import { database } from "../db/firebase";
 
 const createStoryByRankObservable = rank => {
   return Observable.create(observer => {
-    let id = null;
-    const onError = error => {
-      observer.error(error);
-    };
-    const onItemChange = snapshot => {
-      observer.next(snapshot.val());
-    };
-    const onTopStoriesChange = snapshot => {
-      const newId = snapshot.val();
-      if (id === null) {
-        id = newId;
-      } else {
-        database
-          .ref("v0/item")
-          .child(id)
-          .off();
-      }
-      database
-        .ref("v0/item")
-        .child(newId)
-        .on("value", onItemChange, onError);
-    };
-    database
-      .ref("v0/topstories")
-      .child(rank)
-      .on("value", onTopStoriesChange, onError);
+    let storyRef;
+    let onStoryChange;
+    const topStoriesRef = database.ref("v0/topstories").child(rank);
+
+    const onTopStoriesChange = topStoriesRef.on(
+      "value",
+      snapshot => {
+        const storyId = snapshot.val();
+        if (storyRef && onStoryChange) {
+          storyRef.off("value", onStoryChange);
+        }
+        storyRef = database.ref("v0/item").child(storyId);
+        onStoryChange = storyRef.on("value", snapshot =>
+          observer.next(snapshot.val(), error => observer.error(error))
+        );
+      },
+      error => observer.error(error)
+    );
+
     return () => {
-      if (id) {
-        database
-          .ref("v0/item")
-          .child(id)
-          .off();
+      if (storyRef && onStoryChange) {
+        storyRef.off("value", onStoryChange);
       }
-      if (typeof rank === "number") {
-        database
-          .ref("v0/topstories")
-          .child(rank)
-          .off();
+      if (rank !== undefined) {
+        topStoriesRef.off("value", onTopStoriesChange);
       }
       observer.complete();
     };
