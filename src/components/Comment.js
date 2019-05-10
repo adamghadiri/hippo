@@ -44,9 +44,9 @@ export class Comment extends React.Component {
   }
 }
 
-const makeMapStateToProps = () => {
-  return (state, props) => {
-    return { item: itemSelector(state, props) };
+const mapStateToProps = (state, props) => {
+  return {
+    item: itemSelector(state, props)
   };
 };
 
@@ -60,6 +60,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default connect(
-  makeMapStateToProps,
+  mapStateToProps,
   mapDispatchToProps
 )(Comment);

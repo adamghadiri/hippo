@@ -127,15 +127,6 @@ export class Story extends React.Component {
   }
 }
 
-const makeMapStateToProps = () => {
-  return (state, props) => {
-    return {
-      story: storySelector(state, props),
-      item: itemSelector(state, props)
-    };
-  };
-};
-
 const mapStateToProps = (state, props) => {
   return {
     story: storySelector(state, props),
@@ -155,7 +146,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default connect(
-  //makeMapStateToProps,
   mapStateToProps,
   mapDispatchToProps
 )(Story);
