@@ -1,31 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render story loader correctly 1`] = `
-<div
-  className="list-item"
->
-  <ContentLoader
-    height="33"
-    primaryColor="#f3f3f3"
-    secondaryColor="#e2e2e2"
-    speed={2}
-  >
-    <rect
-      height="4"
-      rx="1"
-      ry="1"
-      width="60%"
-      x="0"
-      y="25%"
-    />
-    <rect
-      height="3"
-      rx="1"
-      ry="1"
-      width="40%"
-      x="0"
-      y="75%"
-    />
-  </ContentLoader>
-</div>
-`;
+exports[`should render story loader correctly 1`] = `<_class />`;
