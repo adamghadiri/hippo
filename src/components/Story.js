@@ -73,7 +73,7 @@ export class Story extends React.Component {
         );
 
         return (
-          <div className="list-item content-container">
+          <div className="list-item">
             <div>
               {url ? (
                 <div>
@@ -103,7 +103,7 @@ export class Story extends React.Component {
             .slice(0, 20)
             .map(commentId => <Comment key={commentId} itemId={commentId} />)
         ) : (
-          <div className="list-item list-item--message content-container">
+          <div className="list-item list-item--message">
             <span>No comments posted for this story yet.</span>
           </div>
         );
@@ -113,7 +113,7 @@ export class Story extends React.Component {
       <div>
         {loading &&
           (this.props.showComments ? (
-            <div className="content-container">
+            <div >
               <StoryLoader delay={LONG_LOADER_DELAY} />
               {[...Array(20)].map((_, i) => (
                 <CommentLoader key={i} delay={LONG_LOADER_DELAY} />
@@ -125,7 +125,7 @@ export class Story extends React.Component {
         {!loading &&
           !error &&
           (this.props.showComments ? (
-            <div className="content-container">
+            <div>
               {showStory()}
               {showStoryContent()}
               {showComments()}
@@ -134,7 +134,7 @@ export class Story extends React.Component {
             showStory()
           ))}
         {error && (
-          <div className="list-item list-item--message content-container">
+          <div className="list-item list-item--message">
             <span>Could not load the story. Try again later.</span>
           </div>
         )}
