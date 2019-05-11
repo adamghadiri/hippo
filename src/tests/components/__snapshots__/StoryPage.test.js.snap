@@ -1,8 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render story page correctly 1`] = `
-<ConnectFunction
-  itemId="testItemId"
-  showComments={true}
-/>
+<div
+  className="content-container list-body"
+>
+  <ConnectFunction
+    itemId="testItemId"
+    showComments={true}
+  />
+</div>
 `;

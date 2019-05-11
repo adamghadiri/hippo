@@ -3,7 +3,7 @@
 exports[`should render Story by rank and without comments correctly 1`] = `
 <div>
   <div
-    className="list-item content-container"
+    className="list-item"
   >
     <div>
       <div>
@@ -46,11 +46,9 @@ exports[`should render Story by rank and without comments correctly 1`] = `
 
 exports[`should render Story with comments correctly 1`] = `
 <div>
-  <div
-    className="content-container"
-  >
+  <div>
     <div
-      className="list-item content-container"
+      className="list-item"
     >
       <div>
         <div>
