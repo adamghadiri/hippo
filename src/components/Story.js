@@ -10,7 +10,7 @@ import itemActions from "../actions/items/actions";
 import Comment from "./Comment";
 import StoryLoader from "./StoryLoader";
 import CommentLoader from "./CommentLoader";
-import { formatTime } from "./util";
+import { formatTime, SHORT_LOADER_DELAY, LONG_LOADER_DELAY } from "./util";
 import uuid from "uuid/v1";
 
 export class Story extends React.Component {
@@ -38,7 +38,16 @@ export class Story extends React.Component {
       showComments = () => {};
 
     if (data) {
-      const { title, by, id, kids, score, time, url, text } = data;
+      const {
+        title = "",
+        by = "",
+        id = -1,
+        kids = [],
+        score = 0,
+        time = 0,
+        url = "",
+        text = ""
+      } = data;
 
       showStory = () => {
         const titleToShow = (
@@ -84,12 +93,20 @@ export class Story extends React.Component {
       };
 
       showStoryContent = () =>
-        text && <div className="list-item--content">{parse(text)}</div>;
+        text.length > 0 && (
+          <div className="list-item--content">{parse(text)}</div>
+        );
 
       showComments = () =>
-        kids
-          .slice(0, 20)
-          .map(commentId => <Comment key={commentId} itemId={commentId} />);
+        kids.length > 0 ? (
+          kids
+            .slice(0, 20)
+            .map(commentId => <Comment key={commentId} itemId={commentId} />)
+        ) : (
+          <div className="list-item list-item--message content-container">
+            <span>No comments posted for this story yet.</span>
+          </div>
+        );
     }
 
     return (
@@ -97,13 +114,13 @@ export class Story extends React.Component {
         {loading &&
           (this.props.showComments ? (
             <div className="content-container">
-              <StoryLoader />
+              <StoryLoader delay={LONG_LOADER_DELAY} />
               {[...Array(20)].map((_, i) => (
-                <CommentLoader key={i} />
+                <CommentLoader key={i} delay={LONG_LOADER_DELAY} />
               ))}
             </div>
           ) : (
-            <StoryLoader />
+            <StoryLoader delay={SHORT_LOADER_DELAY} />
           ))}
         {!loading &&
           !error &&

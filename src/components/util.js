@@ -1,5 +1,8 @@
 import moment from "moment";
 
+export const SHORT_LOADER_DELAY = 250;
+export const LONG_LOADER_DELAY = 750;
+
 function secondsToHm(seconds) {
   seconds = Number(seconds);
   var d = Math.floor(seconds / (3600 * 24));
@@ -12,7 +15,7 @@ function secondsToHm(seconds) {
   return dDisplay + hDisplay + mDisplay;
 }
 
-const formatTime = ts => {
+export const formatTime = ts => {
   const deltaSeconds = Math.floor(moment().valueOf() / 1000) - ts;
   if (deltaSeconds < 60) {
     return `just now`;
@@ -21,5 +24,3 @@ const formatTime = ts => {
   }
   return moment.unix(ts).format("HH:mm:ss YYYY/MM/DD");
 };
-
-export { formatTime };

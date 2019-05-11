@@ -5,7 +5,7 @@ import parse from "html-react-parser";
 import { makeItemSelector } from "../selectors/items";
 import actions from "../actions/items/actions";
 import CommentLoader from "./CommentLoader";
-import { formatTime } from "./util";
+import { formatTime, LONG_LOADER_DELAY } from "./util";
 
 export class Comment extends React.Component {
   componentDidMount() {
@@ -32,7 +32,7 @@ export class Comment extends React.Component {
     }
     return (
       <div>
-        {loading && <CommentLoader />}
+        {loading && <CommentLoader delay={LONG_LOADER_DELAY}/>}
         {!loading && !error && show()}
         {error && (
           <div className="list-item list-item--message">
