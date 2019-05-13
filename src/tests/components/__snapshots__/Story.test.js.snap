@@ -2,43 +2,34 @@
 
 exports[`should render Story by rank and without comments correctly 1`] = `
 <div>
-  <div
-    className="list-item"
-  >
-    <div>
-      <div>
-        <div
-          className="list-item__title"
-        >
-          <a
-            href="http://example.com"
-          >
-            <p
-              className="list-item__title"
-            >
-              5.testTitle
-            </p>
-          </a>
-        </div>
-      </div>
-    </div>
+  <div>
     <div
-      className="list-item__subtitle"
+      className="list-item"
     >
-      123
-       points by @
-      TestAuthor
-       created 
-      03:42:01 1970/01/01
-       
-      <Link
-        className="list-item__subtitle list-item__subtitle--link"
-        to="story/1"
+      <div>
+        <a
+          className="list-item__title"
+          href="http://example.com"
+        >
+          5.testTitle
+        </a>
+      </div>
+      <div
+        className="list-item__subtitle"
       >
-        <span>
+        123
+         points by @
+        TestAuthor
+         created 
+        03:42:01 1970/01/01
+         
+        <Link
+          className="list-item__subtitle list-item__subtitle--link"
+          to="story/1"
+        >
           top 20 comments
-        </span>
-      </Link>
+        </Link>
+      </div>
     </div>
   </div>
 </div>
@@ -51,21 +42,12 @@ exports[`should render Story with comments correctly 1`] = `
       className="list-item"
     >
       <div>
-        <div>
-          <div
-            className="list-item__title"
-          >
-            <a
-              href="http://example.com"
-            >
-              <p
-                className="list-item__title"
-              >
-                testTitle
-              </p>
-            </a>
-          </div>
-        </div>
+        <a
+          className="list-item__title"
+          href="http://example.com"
+        >
+          testTitle
+        </a>
       </div>
       <div
         className="list-item__subtitle"
@@ -79,7 +61,7 @@ exports[`should render Story with comments correctly 1`] = `
       </div>
     </div>
     <div
-      className="list-item--content"
+      className="list-item list-item--content"
     >
       sometext
     </div>

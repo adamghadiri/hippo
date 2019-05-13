@@ -11,7 +11,6 @@ import Comment from "./Comment";
 import StoryLoader from "./StoryLoader";
 import CommentLoader from "./CommentLoader";
 import { formatTime, SHORT_LOADER_DELAY, LONG_LOADER_DELAY } from "./util";
-import uuid from "uuid/v1";
 
 export class Story extends React.Component {
   componentDidMount() {
@@ -28,116 +27,117 @@ export class Story extends React.Component {
       this.props.subscribeToItemByIdCancel(this.props.itemId);
     }
   }
+  renderStoryTitleAndSubtitle(title, by, id, score, time, url) {
+    const titleText = this.props.showRank
+      ? this.props.rank + 1 + "." + title
+      : title;
+
+    const storyTitle = (
+      <div>
+        {url ? (
+          <a className="list-item__title" href={url}>
+            {titleText}
+          </a>
+        ) : (
+          <Link
+            className="list-item__title"
+            to={this.props.showRank ? `story/${id}` : `${id}`}
+          >
+            {titleText}
+          </Link>
+        )}
+      </div>
+    );
+
+    const topCommentsLink = (
+      <Link
+        className="list-item__subtitle list-item__subtitle--link"
+        to={`story/${id}`}
+      >
+        top 20 comments
+      </Link>
+    );
+
+    const subtitle = (
+      <div className="list-item__subtitle">
+        {score} points by @{by} created {formatTime(time)}{" "}
+        {this.props.showRank && topCommentsLink}
+      </div>
+    );
+
+    return (
+      <div className="list-item">
+        {storyTitle}
+        {subtitle}
+      </div>
+    );
+  }
+  renderStoryContent(text) {
+    return (
+      text.length > 0 && (
+        <div className="list-item list-item--content">{parse(text)}</div>
+      )
+    );
+  }
+  renderComments(kids) {
+    return kids.length > 0 ? (
+      kids
+        .slice(0, 20)
+        .map(commentId => <Comment key={commentId} itemId={commentId} />)
+    ) : (
+      <div className="list-item list-item--message">
+        No comments posted for this story yet.
+      </div>
+    );
+  }
+  renderStory(data) {
+    const {
+      title = "",
+      by = "",
+      id = -1,
+      kids = [],
+      score = 0,
+      time = 0,
+      url = "",
+      text = ""
+    } = data;
+    return (
+      <div>
+        {this.renderStoryTitleAndSubtitle(title, by, id, score, time, url)}
+        {this.props.showComments && this.renderStoryContent(text)}
+        {this.props.showComments && this.renderComments(kids)}
+      </div>
+    );
+  }
+  renderLoader() {
+    return this.props.showComments ? (
+      <div>
+        <StoryLoader delay={LONG_LOADER_DELAY} />
+        {[...Array(10)].map((_, i) => (
+          <CommentLoader key={i} delay={LONG_LOADER_DELAY} />
+        ))}
+      </div>
+    ) : (
+      <StoryLoader delay={SHORT_LOADER_DELAY} />
+    );
+  }
+  renderErrorMessage() {
+    return (
+      <div className="list-item list-item--message">
+        <span>Could not load the story. Try again later.</span>
+      </div>
+    );
+  }
   render() {
     const { loading, data, error } = this.props.showRank
       ? this.props.story
       : this.props.item;
 
-    let showStory = () => {},
-      showStoryContent = () => {},
-      showComments = () => {};
-
-    if (data) {
-      const {
-        title = "",
-        by = "",
-        id = -1,
-        kids = [],
-        score = 0,
-        time = 0,
-        url = "",
-        text = ""
-      } = data;
-
-      showStory = () => {
-        const titleToShow = (
-          <p className="list-item__title">
-            {this.props.showRank ? this.props.rank + 1 + "." + title : title}
-          </p>
-        );
-
-        const commentsLink = (
-          <Link
-            className="list-item__subtitle list-item__subtitle--link"
-            to={`story/${id}`}
-          >
-            <span>top 20 comments</span>
-          </Link>
-        );
-
-        const subtitle = (
-          <div className="list-item__subtitle">
-            {score} points by @{by} created {formatTime(time)}{" "}
-            {this.props.showRank && commentsLink}
-          </div>
-        );
-
-        return (
-          <div className="list-item">
-            <div>
-              {url ? (
-                <div>
-                  <div className="list-item__title">
-                    <a href={url}>{titleToShow}</a>
-                  </div>
-                </div>
-              ) : (
-                <Link to={this.props.showRank ? `story/${id}` : `${id}`}>
-                  {titleToShow}
-                </Link>
-              )}
-            </div>
-            {subtitle}
-          </div>
-        );
-      };
-
-      showStoryContent = () =>
-        text.length > 0 && (
-          <div className="list-item--content">{parse(text)}</div>
-        );
-
-      showComments = () =>
-        kids.length > 0 ? (
-          kids
-            .slice(0, 20)
-            .map(commentId => <Comment key={commentId} itemId={commentId} />)
-        ) : (
-          <div className="list-item list-item--message">
-            <span>No comments posted for this story yet.</span>
-          </div>
-        );
-    }
-
     return (
       <div>
-        {loading &&
-          (this.props.showComments ? (
-            <div >
-              <StoryLoader delay={LONG_LOADER_DELAY} />
-              {[...Array(20)].map((_, i) => (
-                <CommentLoader key={i} delay={LONG_LOADER_DELAY} />
-              ))}
-            </div>
-          ) : (
-            <StoryLoader delay={SHORT_LOADER_DELAY} />
-          ))}
-        {!loading &&
-          !error &&
-          (this.props.showComments ? (
-            <div>
-              {showStory()}
-              {showStoryContent()}
-              {showComments()}
-            </div>
-          ) : (
-            showStory()
-          ))}
-        {error && (
-          <div className="list-item list-item--message">
-            <span>Could not load the story. Try again later.</span>
-          </div>
-        )}
+        {loading && this.renderLoader()}
+        {!loading && !error && data && this.renderStory(data)}
+        {error && renderErrorMessage()}
       </div>
     );
   }

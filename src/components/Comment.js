@@ -14,31 +14,35 @@ export class Comment extends React.Component {
   componentWillUnmount() {
     this.props.subscribeToItemByIdCancel(this.props.itemId);
   }
+  renderComments(data) {
+    const { by = "", text = "", time = 0 } = data;
+    return (
+      text.length > 0 && (
+        <div className="list-item comment">
+          <h6 className="comment-username">
+            @{by} {formatTime(time)}
+          </h6>
+          <div className="comment-content">{parse(text)}</div>
+        </div>
+      )
+    );
+  }
+  renderLoader() {
+    return <CommentLoader delay={LONG_LOADER_DELAY} />;
+  }
+  renderErrorMessage() {
+    <div className="list-item list-item--message">
+      <span>Could not load the comment. Try again later.</span>
+    </div>;
+  }
   render() {
     const { loading, data, error } = this.props.item;
 
-    let show = () => {};
-    if (data) {
-      const { by, text, time } = data;
-      show = () =>
-        text && (
-          <div className="list-item comment">
-            <h6 className="comment-username">
-              @{by} {formatTime(time)}
-            </h6>
-            <div className="comment-content">{parse(text)}</div>
-          </div>
-        );
-    }
     return (
       <div>
-        {loading && <CommentLoader delay={LONG_LOADER_DELAY}/>}
-        {!loading && !error && show()}
-        {error && (
-          <div className="list-item list-item--message">
-            <span>Could not load the comment. Try again later.</span>
-          </div>
-        )}
+        {loading && this.renderLoader()}
+        {!loading && !error && data && this.renderComments(data)}
+        {error && this.renderErrorMessage()}
       </div>
     );
   }
