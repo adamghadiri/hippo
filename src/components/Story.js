@@ -124,7 +124,7 @@ export class Story extends React.Component {
   renderErrorMessage() {
     return (
       <div className="list-item list-item--message">
-        <span>Could not load the story. Try again later.</span>
+        Could not load the story. Try again later.
       </div>
     );
   }
@@ -137,7 +137,7 @@ export class Story extends React.Component {
       <div>
         {loading && this.renderLoader()}
         {!loading && !error && data && this.renderStory(data)}
-        {error && renderErrorMessage()}
+        {error && this.renderErrorMessage()}
       </div>
     );
   }
